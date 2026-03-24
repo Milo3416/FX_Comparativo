@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genesys Cloud CX vs Cisco Webex Contact Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --genesys: #ff5a1f;
+      --webex: #1f6feb;
+      --ink: #132238;
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --line: #d9e0ea;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 1.25rem; box-shadow: 0 8px 24px rgba(16,24,40,.06); }
+    .pill { display: inline-flex; align-items: center; border-radius: 9999px; padding: .35rem .75rem; font-size: .85rem; font-weight: 600; }
+    .table-wrap { overflow-x: auto; }
+    th, td { vertical-align: top; }
+    .kpi { border:1px solid var(--line); border-radius: 1.25rem; padding: 1rem; background: #fff; }
+    .callout { border-radius: 1.25rem; border: 1px solid; padding: 1.25rem; }
+    .callout-amber { background: #fffbeb; border-color: #fde68a; }
+    .callout-blue { background: #eff6ff; border-color: #bfdbfe; }
+    .callout-slate { background: #f8fafc; border-color: #e2e8f0; }
+    .mini-title { font-size:.78rem; letter-spacing:.2em; text-transform:uppercase; font-weight:800; color: #64748b; }
+    .badge { display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .55rem; border-radius:9999px; font-weight:700; font-size:.78rem; border:1px solid transparent;}
+    .b-native{ background: rgba(22,163,74,.10); border-color: rgba(22,163,74,.25); color: #166534;}
+    .b-addon{ background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.28); color: #92400e;}
+    .b-third{ background: rgba(239,68,68,.10); border-color: rgba(239,68,68,.25); color: #991b1b;}
+    .b-validate{ background: rgba(100,116,139,.12); border-color: rgba(100,116,139,.22); color: #334155;}
+    a.inline-link { color:#0f172a; text-decoration: underline; text-underline-offset: 3px; }
+  </style>
+</head>
+
+<body>
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <div>
+        <p class="text-xs uppercase tracking-[0.22em] text-slate-500">Evaluación FX: control, evidencia y auditoría</p>
+        <h1 class="text-xl md:text-2xl font-bold">Genesys Cloud CX vs Cisco Webex Contact Center</h1>
+      </div>
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-slate-600">
+        <a href="#resumen" class="hover:text-slate-900">Resumen</a>
+        <a href="#control" class="hover:text-slate-900">Control & Cumplimiento</a>
+        <a href="#genesysfx" class="hover:text-slate-900">Genesys para FX</a>
+        <a href="#piloto" class="hover:text-slate-900">Piloto previo</a>
+        <a href="#puesto" class="hover:text-slate-900">Puesto de trabajo</a>
+        <a href="#requisitos" class="hover:text-slate-900">Requisitos FX</a>
+        <a href="#fuentes" class="hover:text-slate-900">Fuentes</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-20 grid lg:grid-cols-[1.25fr_.9fr] gap-10 items-center">
+      <div>
+        <span class="pill bg-white/10 text-white border border-white/15 mb-4">
+          CONTEXTO
+        </span>
+
+        <h2 class="text-4xl md:text-5xl font-bold leading-tight">
+          Cuando cada llamada es una transacción, la plataforma se evalúa por evidencia, auditoría y trazabilidad.
+        </h2>
+
+        <p class="mt-5 text-lg text-slate-200 max-w-3xl">
+          El contenido de esta página esta diseñado para operaciones FX con disputas de aceptación “yo no autoricé”,
+          obligaciones de resguardo regulatorio, necesidad de monitoreo y control operativo</p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <span class="pill bg-white text-slate-900">No repudio / evidencia</span>
+          <span class="pill bg-white text-slate-900">Retención y auditoría</span>
+          <span class="pill bg-white text-slate-900">Monitoreo + QA/QM</span>
+          <span class="pill bg-white text-slate-900">Productividad real</span>
+          <span class="pill bg-white text-slate-900">Softphone corporativo</span>
+        </div>
+      </div>
+
+      <div class="card p-6 bg-white text-slate-900">
+        <h3 class="text-lg font-semibold mb-4">Obstaculo a superar</h3>
+        <div class="space-y-4 text-sm leading-6 text-slate-700">
+          <p>
+            El problema no es solo “hacer llamadas”: es <strong>probar qué se acordó</strong>, <strong>quién lo acordó</strong>,
+            <strong>cuándo</strong> y <strong>con qué controles</strong>.
+          </p>
+          <p>
+            Dos decisiones mandan: 
+            <li><strong>(1) control & cumplimiento</strong> (grabación/retención/accesos/auditoría) y</li>
+            <li><strong>(2) modelo operativo</strong> (puesto corporativo, softphone, supervisión, métricas).</li>
+          </p>
+        </div>
+
+        <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+          <div class="kpi">
+            <div class="mini-title">Objetivo</div>
+            <div class="mt-1 font-semibold">Reducir disputas y riesgo</div>
+            <div class="mt-1 text-slate-600">Evidencia verificable</div>
+          </div>
+          <div class="kpi">
+            <div class="mini-title">Operación</div>
+            <div class="mt-1 font-semibold">Forzar control</div>
+            <div class="mt-1 text-slate-600">Desde corporativo</div>
+          </div>
+          <div class="kpi">
+            <div class="mini-title">Visibilidad</div>
+            <div class="mt-1 font-semibold">Trazabilidad</div>
+            <div class="mt-1 text-slate-600">Agente ↔ Cliente</div>
+          </div>
+          <div class="kpi">
+            <div class="mini-title">Escala</div>
+            <div class="mt-1 font-semibold">Arranque incremental</div>
+            <div class="mt-1 text-slate-600">Sin rediseñar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- RESUMEN -->
+    <section id="resumen">
+      <div class="mb-8 callout callout-amber">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-700">Contexto típico del problema en FX</p>
+        <p class="mt-3 text-slate-700 leading-7">
+          En equipos de Foreign Exchange, es común enfrentar disputas de aceptación (“yo no autoricé”),
+          exigencias de resguardo regulatorio, y necesidad de auditoría: quién llamó, a quién, cuánto duró,
+          qué se dijo y quién accedió a esa evidencia. Cuando el área es nueva, también aparece la falta de
+          disciplina operativa y métricas confiables.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card p-7">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-3 h-3 rounded-full" style="background: var(--genesys);"></span>
+            <h4 class="text-xl font-semibold">Genesys Cloud CX</h4>
+          </div>
+          <p class="text-slate-700 leading-7">
+            Fuerte cuando el cliente busca una plataforma de CX + CCaaS con capacidades nativas de
+            <strong>grabación basada en políticas</strong>, <strong>quality management</strong> y <strong>analytics</strong>,
+            para convertir interacciones en evidencia auditable y disciplina operativa.
+          </p>
+          <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Para FX:</strong><br>Control + evidencia</div>
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Operación:</strong><br>QA/QM + métricas</div>
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Softphone:</strong><br>Cliente nativo</div>
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Escala:</strong><br>De pequeño a grande</div>
+          </div>
+        </div>
+
+        <div class="card p-7">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-3 h-3 rounded-full" style="background: var(--webex);"></span>
+            <h4 class="text-xl font-semibold">Cisco Webex Contact Center</h4>
+          </div>
+          <p class="text-slate-700 leading-7">
+            Atractivo cuando el cliente ya está estandarizado en Cisco/Webex y quiere extender
+            su modelo corporativo (voz y colaboración) hacia contact center. En casos de cumplimiento y análisis profundo,
+            la recomendación es validar en piloto la profundidad requerida por FX (grabación, auditoría, QA/QM, reporting).
+          </p>
+          <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Para FX:</strong><br>Poco profundidad</div>
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Enfoque:</strong><br>Voz + colaboración</div>
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Valor:</strong><br>Estandarización TI</div>
+            <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200"><strong>Riesgo:</strong><br>Fricción por piezas</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROL & CUMPLIMIENTO -->
+    <section id="control">
+      <div class="mb-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Control & cumplimiento</p>
+        <h3 class="text-3xl font-bold">De “grabación” a evidencia defendible</h3>
+      </div>
+
+      <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-6 items-start">
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">Lo que un líder debería exigir (independiente del proveedor)</h4>
+          <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+            <li><strong>No repudio:</strong> reconstruir interacción completa (audio + metadatos) y vincularla a agente/cliente.</li>
+            <li><strong>Políticas de grabación:</strong> reglas por colas, troncales o perfiles, y supresión cuando aplique.</li>
+            <li><strong>Retención & purga:</strong> periodos configurables y borrado controlado.</li>
+            <li><strong>Controles de acceso:</strong> roles/segregación (operación vs auditoría).</li>
+            <li><strong>Auditoría:</strong> trazabilidad de accesos/descargas/reproducciones.</li>
+            <li><strong>Consentimiento:</strong> manejo del consentimiento cuando sea requerido (p. ej., anuncios o flujos de opt-out).</li>
+          </ul>
+
+          <div class="mt-6 callout callout-slate">
+            <p class="font-semibold text-slate-900">Recomendación</p>
+            <p class="mt-2 text-slate-700 leading-7">
+              Antes de “elegir plataforma”, definan su <strong>política interna de evidencia</strong> (retención, accesos,
+              auditoría, exportación) y su <strong>modelo de operación</strong> (corporativo-only vs híbrido controlado).
+              Eso reduce el riesgo de repetir un piloto fallido.
+            </p>
+          </div>
+        </div>
+
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">Resultados que deben volverse medibles</h4>
+          <div class="space-y-3 text-slate-700 leading-7">
+            <div class="kpi">
+              <div class="mini-title">Riesgo</div>
+              <div class="mt-1 font-semibold">Disputas por aceptación</div>
+              <div class="mt-1 text-slate-600"># disputas / % resueltas con evidencia</div>
+            </div>
+            <div class="kpi">
+              <div class="mini-title">Control</div>
+              <div class="mt-1 font-semibold">Cumplimiento de “corporativo-only”</div>
+              <div class="mt-1 text-slate-600">% llamadas dentro del modelo definido</div>
+            </div>
+            <div class="kpi">
+              <div class="mini-title">Productividad</div>
+              <div class="mt-1 font-semibold">Cobertura y tiempo con cliente</div>
+              <div class="mt-1 text-slate-600">contactos/día, talk time, ACW, etc.</div>
+            </div>
+            <div class="kpi">
+              <div class="mini-title">Auditoría</div>
+              <div class="mt-1 font-semibold">Accesos a evidencia</div>
+              <div class="mt-1 text-slate-600">¿Quién accede?, ¿Cuándo?, ¿Por qué?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENESYS PARA FX (POSTURA) -->
+    <section id="genesysfx">
+      <div class="mb-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Genesys Cloud</p>
+        <h3 class="text-3xl font-bold">Capacidades específicas para FX: grabación, QA/QM y analytics</h3>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">1) Grabación y cumplimiento regulatorio</h4>
+          <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+            <li><strong>Policy-based recording:</strong> grabación basada en políticas para cumplimiento en contact center.</li>
+            <li><strong>Grabación automática</strong> cuando se habilita grabación en el trunk (escenario típico de voz SIP/telefónica).</li>
+            <li><strong>Retención</strong> para quality management, analytics y requerimientos de cumplimiento (definida por políticas).</li>
+            <li><strong>Consentimiento:</strong> flujos de consentimiento/opt-out cuando aplique.</li>
+            <li><strong>Anuncio/IVR</strong> de grabación (cuando el marco regulatorio o legal lo requiera).</li>
+          </ul>
+          <div class="mt-5 callout callout-slate">
+            <p class="font-semibold text-slate-900">Por qué importa en FX</p>
+            <p class="mt-2 text-slate-700 leading-7">
+              Convierte disputas de aceptación en un proceso defendible: evidencia + metadatos + gobierno de acceso.
+            </p>
+          </div>
+        </div>
+
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">2) Monitoreo y analytics completos</h4>
+          <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+            <li><strong>Dashboards</strong> en tiempo real e históricos para supervisores/gerencia.</li>
+            <li><strong>Métricas de desempeño:</strong> talk time, volumen, tiempos, actividad por agente y por cliente.</li>
+            <li><strong>Speech/Text Analytics</strong> para extraer señales (tópicos, patrones, sentimiento) sobre interacciones.</li>
+            <li><strong>Reportes exportables</strong> y programables para auditoría y análisis.</li>
+            <li><strong>Analytics add-on (opcional):</strong> capa de data warehouse y aceleradores BI (Tableau/PowerBI) si el cliente lo requiere.</li>
+          </ul>
+          <div class="mt-5 callout callout-blue">
+            <p class="font-semibold text-slate-900">Enfoque para dirección</p>
+            <p class="mt-2 text-slate-700 leading-7">
+              Primero control y disciplina; después analítica avanzada para mejorar productividad y reducir variabilidad.
+            </p>
+          </div>
+        </div>
+
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">3) Quality Management (QM)</h4>
+          <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+            <li><strong>Formularios de evaluación</strong> flexibles sobre cualquier interacción grabada.</li>
+            <li><strong>Workflows</strong> de evaluación (asignaciones automatizadas y ad hoc).</li>
+            <li><strong>Coaching</strong> para supervisores y agentes; anotaciones sobre grabaciones.</li>
+            <li><strong>Monitoreo</strong> de interacciones en progreso (según permisos y diseño operativo).</li>
+          </ul>
+          <div class="mt-5 callout callout-slate">
+            <p class="font-semibold text-slate-900">Por qué importa en FX</p>
+            <p class="mt-2 text-slate-700 leading-7">
+              Reduce “interpretaciones” y crea un estándar verificable de ejecución comercial.
+            </p>
+          </div>
+        </div>
+
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">4) Softphone (cliente de voz) + escalabilidad</h4>
+          <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+            <li><strong>PureCloud Softphone</strong> como cliente nativo de escritorio (Windows) para entornos donde WebRTC puede estar restringido.</li>
+            <li><strong>Clientes embebidos</strong> para integraciones (p. ej., en plataformas de trabajo donde aplique).</li>
+            <li><strong>Escalabilidad</strong>: arrancar con equipo pequeño y crecer por oleadas sin rediseñar roles/colas/políticas.</li>
+            <li><strong>Seguridad y cumplimiento</strong>: portafolio de certificaciones y marcos (ver Trust/Compliance).</li>
+          </ul>
+          <div class="mt-5 callout callout-amber">
+            <p class="font-semibold text-slate-900">Recomendación</p>
+            <p class="mt-2 text-slate-700 leading-7">
+              Para “corporativo-only”, define endpoint corporativo (softphone), red y SSO como parte del alcance del piloto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUESTO DE TRABAJO -->
+    <section id="puesto">
+      <div class="mb-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Puesto de trabajo y control</p>
+        <h3 class="text-3xl font-bold">Forzar llamadas “dentro del corporativo” sin perder métricas</h3>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">Modelo A: Corporate-only (recomendado para FX)</h4>
+          <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+            <li>Endpoints corporativos administrados (softphone/desktop).</li>
+            <li>Acceso por red y políticas (SSO, permisos, restricciones por ubicación, etc.).</li>
+            <li>Grabación obligatoria + retención + auditoría.</li>
+            <li>Reporting estándar: agente/cliente/tiempo/resultado.</li>
+          </ul>
+        </div>
+
+        <div class="card p-7">
+          <h4 class="text-xl font-semibold mb-4">Modelo B: Híbrido controlado (si el negocio lo exige)</h4>
+          <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+            <li>Excepciones explícitas con reglas de evidencia y acceso.</li>
+            <li>Separación de perfiles: quién puede operar fuera y bajo qué condiciones.</li>
+            <li>Auditoría reforzada de accesos y exportaciones.</li>
+            <li>KPIs de excepción: % fuera del corporativo, motivos, revisiones periódicas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQUISITOS FX (MATRIZ) -->
+    <section id="requisitos">
+      <div class="mb-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Requisitos FX</p>
+        <h3 class="text-3xl font-bold">Matriz ejecutiva: qué validar (sin puntajes)</h3>
+      </div>
+
+      <div class="mb-6 callout callout-slate">
+        <p class="text-slate-700 leading-7">
+          Etiquetas: <span class="badge b-native">Nativo</span>,
+          <span class="badge b-addon">Add-on / módulo</span>,
+          <span class="badge b-third">Tercero</span>,
+          <span class="badge b-validate">Validar en piloto</span>.
+        </p>
+      </div>
+
+      <div class="table-wrap card p-2">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left border-b border-slate-200 bg-slate-50">
+              <th class="p-4 font-semibold">Requisito crítico</th>
+              <th class="p-4 font-semibold">Por qué importa en mesa FX</th>
+              <th class="p-4 font-semibold">Genesys Cloud CX</th>
+              <th class="p-4 font-semibold">Cisco Webex CC</th>
+              <th class="p-4 font-semibold">Qué pedir en piloto/RFP</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-700">
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Policy-based recording</td>
+              <td class="p-4">Evidencia consistente, gobernable</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Políticas por colas/troncales/roles + supresión donde aplique</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Grabación automática por trunk</td>
+              <td class="p-4">Cobertura (p. ej., 100% llamadas de FX)</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Habilitación de grabación en trunk + pruebas de reproducción/exportación</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Consentimiento / anuncio de grabación</td>
+              <td class="p-4">Cumplimiento (según política interna)</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Flujo IVR/anuncio + excepciones (opt-out) si aplica</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Retención & purga</td>
+              <td class="p-4">Cumplimiento y control de almacenamiento</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Política por tipo de interacción + evidencia de borrado controlado</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Auditoría de accesos</td>
+              <td class="p-4">Saber quién escuchó/descargó evidencia</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Log de accesos + roles + segregación de funciones</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Quality Management (evaluación/coaching)</td>
+              <td class="p-4">Estandarizar ejecución y coaching</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Scorecards, calibración, evaluación sobre grabaciones</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Dashboards & reporting</td>
+              <td class="p-4">Productividad real (agente/cliente)</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Vistas por agente/cola + exportación programada</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Speech & Text Analytics</td>
+              <td class="p-4">Detección de tópicos, señales y riesgo</td>
+              <td class="p-4"><span class="badge b-addon">Add-on / módulo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Cobertura, costos, y outputs (tópicos/sentimiento) relevantes para FX</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Analytics add-on (data warehouse/BI)</td>
+              <td class="p-4">Reporteo avanzado / BI corporativo</td>
+              <td class="p-4"><span class="badge b-addon">Add-on / módulo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Conectores/exports, gobernanza de datos, dashboards (PowerBI/Tableau)</td>
+            </tr>
+
+            <tr class="border-b border-slate-100">
+              <td class="p-4 font-semibold text-slate-900">Softphone nativo de escritorio</td>
+              <td class="p-4">Puesto corporativo controlado (Windows)</td>
+              <td class="p-4"><span class="badge b-native">Nativo</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Compatibilidad, operación en red corporativa, soporte, troubleshooting</td>
+            </tr>
+
+            <tr>
+              <td class="p-4 font-semibold text-slate-900">Seguridad & cumplimiento (marcos)</td>
+              <td class="p-4">Resiliencia y auditoría en entorno regulado</td>
+              <td class="p-4"><span class="badge b-native">Portafolio Trust</span></td>
+              <td class="p-4"><span class="badge b-validate">Validar en piloto</span></td>
+              <td class="p-4">Revisar Trust/Compliance, auditorías, y responsabilidades compartidas</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><b>Nota: Si cuentan con Genesys Cloud CX3 todas las capacidades anteriores las encontraran <span class="badge b-native">NATIVAS</span></b></p>
+      </div>
+
+    <!-- FUENTES (URLs SOLICITADAS) -->
+    <section id="fuentes">
+      <div class="mb-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Fuentes (URLs)</p>
+        <h3 class="text-3xl font-bold">Documentación referencial para validación técnica y de cumplimiento</h3>
+      </div>
+
+      <div class="card p-7">
+        <ul class="list-disc ml-5 text-slate-700 space-y-2 leading-7">
+          <li>
+            Administrator requirements for the Genesys Cloud embedded clients (Genesys Cloud Resource Center):
+            <a class="inline-link" href="https://help.genesys.cloud/articles/administrator-requirements-for-the-genesys-cloud-embedded-clients/" target="_blank" rel="noopener">https://help.genesys.cloud/articles/administrator-requirements-for-the-genesys-cloud-embedded-clients/</a>
+          </li>
+          <li>
+            Check the PureCloud Softphone status (Genesys Cloud Resource Center):
+            <a class="inline-link" href="https://help.genesys.cloud/8394/" target="_blank" rel="noopener">https://help.genesys.cloud/8394/</a>
+          </li>
+          <li>
+            Call recording in Genesys Cloud overview (Genesys Cloud Resource Center):
+            <a class="inline-link" href="https://help.genesys.cloud/articles/recording-in-genesys-cloud/" target="_blank" rel="noopener">https://help.genesys.cloud/articles/recording-in-genesys-cloud/</a>
+          </li>
+          <li>
+            Quality Assurance and Compliance (Genesys Cloud Resource Center):
+            <a class="inline-link" href="https://help.genesys.cloud/usecases/quality-assurance-and-compliance/" target="_blank" rel="noopener">https://help.genesys.cloud/usecases/quality-assurance-and-compliance/</a>
+          </li>
+          <li>
+            Administrators (Genesys Cloud Resource Center):
+            <a class="inline-link" href="https://help.genesys.cloud/administrators/" target="_blank" rel="noopener">https://help.genesys.cloud/administrators/</a>
+          </li>
+          <li>
+            About quality management (Genesys Cloud Resource Center):
+            <a class="inline-link" href="https://help.genesys.cloud/articles/about-quality-management/" target="_blank" rel="noopener">https://help.genesys.cloud/articles/about-quality-management/</a>
+          </li>
+          <li>
+            Add Genesys Cloud Analytics to your subscription (Genesys Cloud Resource Center):
+            <a class="inline-link" href="https://help.genesys.cloud/articles/add-genesys-cloud-analytics-to-your-subscription/" target="_blank" rel="noopener">https://help.genesys.cloud/articles/add-genesys-cloud-analytics-to-your-subscription/</a>
+          </li>
+          <li>
+            Navigating compliance with the Digital Operational Resilience Act (Genesys resource):
+            <a class="inline-link" href="https://www.genesys.com/resources/navigating-compliance-with-the-digital-operational-resilience-act" target="_blank" rel="noopener">https://www.genesys.com/resources/navigating-compliance-with-the-digital-operational-resilience-act</a>
+          </li>
+          <li>
+            Contact Center Security and Compliance (Genesys capabilities):
+            <a class="inline-link" href="https://www.genesys.com/capabilities/security-and-compliance" target="_blank" rel="noopener">https://www.genesys.com/capabilities/security-and-compliance</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section>
+      <div class="card p-8 bg-slate-900 text-white">
+        <p class="text-sm uppercase tracking-[0.2em] text-slate-300 mb-3">Conclusión</p>
+        <h3 class="text-3xl font-bold mb-4">En FX, gana el enfoque que convierte conversaciones en evidencia auditable.</h3>
+        <p class="text-slate-200 leading-8 max-w-5xl">
+          Para dirección, la decisión correcta no se basa en “más features”, sino en menor riesgo operativo/regulatorio
+          con mayor control: grabación obligatoria, retención, auditoría, trazabilidad y disciplina de operación.
+          Una vez estabilizado control y visibilidad, se puede evolucionar a analytics/speech-text y optimización avanzada.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Ruta 90 días: control -> visibilidad -> mejora (no comparativo por proveedor)
+    const planCtx = document.getElementById('planChart');
+    new Chart(planCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Fase 1 (0-30d)', 'Fase 2 (31-60d)', 'Fase 3 (61-90d)'],
+        datasets: [
+          {
+            label: 'Control & Cumplimiento',
+            data: [10, 6, 3],
+            backgroundColor: 'rgba(239, 68, 68, 0.70)',
+            borderColor: 'rgba(239, 68, 68, 1)',
+            borderWidth: 1,
+            borderRadius: 10
+          },
+          {
+            label: 'Visibilidad & Productividad',
+            data: [4, 9, 6],
+            backgroundColor: 'rgba(245, 158, 11, 0.70)',
+            borderColor: 'rgba(245, 158, 11, 1)',
+            borderWidth: 1,
+            borderRadius: 10
+          },
+          {
+            label: 'Mejora & Evolución',
+            data: [1, 4, 9],
+            backgroundColor: 'rgba(22, 163, 74, 0.70)',
+            borderColor: 'rgba(22, 163, 74, 1)',
+            borderWidth: 1,
+            borderRadius: 10
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top' },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + context.raw + '/10 (prioridad relativa)';
+              }
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, max: 10, ticks: { stepSize: 2 } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
